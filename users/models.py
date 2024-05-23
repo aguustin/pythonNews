@@ -3,8 +3,8 @@ from django.forms import model_to_dict
 
 # Create your models here.
 
-class Users(models.Model):
-    profile = models.FileField(upload_to="users_profiles")
+class User(models.Model):
+    profile = models.FileField(upload_to="users_profiles", null=True, blank=True)
     firstName = models.CharField(max_length=20)
     lastName = models.CharField(max_length=20)
     mail = models.EmailField(max_length=50)

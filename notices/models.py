@@ -1,30 +1,11 @@
 from django.db import models
 from django.forms import model_to_dict
 from news import settings
-from users.models import Users
+from users.models import User
 
 # Create your models here.
 
-#class Users(models.Model):
-   # profile = models.FileField(upload_to="users_profiles")
-   # firstName = models.CharField(max_length=20)
-   # lastName = models.CharField(max_length=20)
-   # mail = models.EmailField(max_length=50)
-   # password = models.CharField(max_length=30)
-   # userType = models.IntegerField()
-
-    #def __str__(self):
-    #    return self.mail
-    
-    #def toJSON(self):
-    #    item = model_to_dict(self)
-    #    return item
-
-   # class Meta:
-   #     db_table = 'Users'
-   #     ordering = ['id']
-
-class News(models.Model):
+class New(models.Model):
     title = models.CharField(max_length=150)
     subtitle = models.CharField(max_length=200)
     imageTitle = models.FileField(upload_to="news_images")
@@ -46,23 +27,23 @@ class News(models.Model):
         db_table = 'News'
         ordering = ['id']
 
-class Categories(models.Model):
-    categories = models.CharField(max_length=30)
+class Category(models.Model):
+    category = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.categories
+        return self.category
     
     def toJSON(self):
         item = model_to_dict(self)
         return item
 
     class Meta:
-        db_table = 'Categories'
+        db_table = 'Category'
         ordering = ['id']
 
-class Users_News(models.Model):
-    users_code = models.ForeignKey(Users,on_delete=models.CASCADE, default="")
-    news_code = models.ForeignKey(News, on_delete=models.CASCADE, default="")
+class User_New(models.Model):
+    user_code = models.ForeignKey(User,on_delete=models.CASCADE, default="")
+    new_code = models.ForeignKey(New, on_delete=models.CASCADE, default="")
 
     def __str__(self):
         return str(self.id)
@@ -74,19 +55,19 @@ class Users_News(models.Model):
         return item
     
     class Meta:
-        db_table = 'Users_and_News'
+        db_table = 'User_New'
         ordering = ['id']
 
-class Categories_News(models.Model):
-    categories_code = models.ForeignKey(Categories, on_delete=models.CASCADE, default="")
-    news_code = models.ForeignKey(News, on_delete=models.CASCADE, default="")
+class Category_New(models.Model):
+    category_code = models.ForeignKey(Category, on_delete=models.CASCADE, default="")
+    new_code = models.ForeignKey(New, on_delete=models.CASCADE, default="")
 
     def __str__(self):
         return str(self.id)
     
     def toJSON(self):
         item = model_to_dict(self)
-        item['categories_code'] = self.categories_code.toJSON()
+        item['categories_code'] = self.category_code.toJSON()
         item['news_code'] = self.news_code.toJSON()
         return item
     

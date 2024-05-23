@@ -1,24 +1,12 @@
 from django.contrib import admin
 
-from notices.models import Categories, Categories_News, News, Users, Users_News
+from notices.models import Category, Category_New, New, User_New
 # Register your models here.
 
 #Users, News, Categories, Users_News, Categories_News
 
 
-#class UsersAdmin(admin.ModelAdmin):
-       # list_display = [
-       #     'profile',
-       #     'firstName',
-      #      'lastName',
-      #      'mail',
-       #     'password',
-      #      'userType'
-      #  ]
-#admin.site.register(Users, UsersAdmin)
-
-
-class NewsAdmin(admin.ModelAdmin):
+class NewAdmin(admin.ModelAdmin):
         list_display = [
             'title',
             'subtitle',
@@ -31,27 +19,27 @@ class NewsAdmin(admin.ModelAdmin):
             'thirdImage'
         ]
 
-admin.site.register(News, NewsAdmin)
+admin.site.register(New, NewAdmin)
 
-class CategoriesAdmin(admin.ModelAdmin):
+class CategoryAdmin(admin.ModelAdmin):
         list_display = [
-            'categories'
+            'category'
         ]
 
-admin.site.register(Categories, CategoriesAdmin)
+admin.site.register(Category, CategoryAdmin)
 
-class Users_News_Admin(admin.ModelAdmin):
+class User_New_Admin(admin.ModelAdmin):
         list_display = [
-                'users_code',
-                'news_code'
+                'user_code',
+                'new_code'
         ]
 
-admin.site.register(Users_News, Users_News_Admin)
+admin.site.register(User_New, User_New_Admin)
 
-class Categories_News_Admin(admin.ModelAdmin):
+class Category_New_Admin(admin.ModelAdmin):
         list_display = [
-            'categories_code',
-            'news_code'
+            'category_code',
+            'new_code'
         ]
 
-admin.site.register(Categories_News, Categories_News_Admin)
+admin.site.register(Category_New, Category_New_Admin)
