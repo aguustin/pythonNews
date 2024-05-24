@@ -16,7 +16,8 @@ class NewAdmin(admin.ModelAdmin):
             'thirdParagraph',
             'firstImage',
             'secondImage',
-            'thirdImage'
+            'thirdImage',
+            'new_date'
         ]
 
 admin.site.register(New, NewAdmin)

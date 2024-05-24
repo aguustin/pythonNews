@@ -15,7 +15,8 @@ class New(models.Model):
     firstImage = models.FileField(upload_to="news_images")
     secondImage = models.FileField(upload_to="news_images")
     thirdImage = models.FileField(upload_to="news_images")
-
+    new_date = models.DateField()
+    
     def __str__(self):
         return self.title
     
