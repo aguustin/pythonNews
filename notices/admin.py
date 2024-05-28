@@ -11,7 +11,7 @@ class NewAdmin(admin.ModelAdmin):
             'title',
             'subtitle',
             'imageTitle',
-            'firsParagraph',
+            'firstParagraph',
             'secondParagraph',
             'thirdParagraph',
             'firstImage',

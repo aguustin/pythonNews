@@ -18,11 +18,11 @@ class CategorySerializer(serializers.ModelSerializer):
 
 class NewsSerializer(serializers.ModelSerializer):
 
-    category_code = CategorySerializer()
+    #category_code = CategorySerializer()
 
     class Meta:
         model = New
-        fields = ['title', 'subtitle', 'imageTitle', 'firstParagraph', 'secondParagraph', 'thirdParagraph', 'firstImage', 'secondImage', 'thirdImage', 'new_date', 'category_code']
+        fields = ['title', 'subtitle', 'imageTitle', 'firstParagraph', 'secondParagraph', 'thirdParagraph', 'firstImage', 'secondImage', 'thirdImage', 'new_date']
 
 
 class User_New_Serializer(serializers.ModelSerializer):

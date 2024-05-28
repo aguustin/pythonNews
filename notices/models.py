@@ -9,16 +9,16 @@ class New(models.Model):
     title = models.CharField(max_length=150)
     subtitle = models.CharField(max_length=200)
     imageTitle = models.FileField(upload_to="news_images")
-    firsParagraph = models.TextField()
+    firstParagraph = models.TextField()
     secondParagraph = models.TextField()
     thirdParagraph = models.TextField()
     firstImage = models.FileField(upload_to="news_images")
     secondImage = models.FileField(upload_to="news_images")
     thirdImage = models.FileField(upload_to="news_images")
-    new_date = models.DateField()
+    new_date = models.DateField(null=True)
     
     def __str__(self):
-        return self.title
+        return str(self.id)
     
     def toJSON(self):
         item = model_to_dict(self)
@@ -32,7 +32,7 @@ class Category(models.Model):
     category = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.category
+        return str(self.id)
     
     def toJSON(self):
         item = model_to_dict(self)
@@ -51,8 +51,8 @@ class User_New(models.Model):
     
     def toJSON(self):
         item = model_to_dict(self)
-        item['users_code'] = self.users_code.toJSON()
-        item['news_code'] = self.news_code.toJSON()
+        item['user_code'] = self.user_code.toJSON()
+        item['new_code'] = self.new_code.toJSON()
         return item
     
     class Meta:
@@ -68,8 +68,8 @@ class Category_New(models.Model):
     
     def toJSON(self):
         item = model_to_dict(self)
-        item['categories_code'] = self.category_code.toJSON()
-        item['news_code'] = self.news_code.toJSON()
+        item['category_code'] = self.category_code.toJSON()
+        item['new_code'] = self.new_code.toJSON()
         return item
     
     class Meta:
