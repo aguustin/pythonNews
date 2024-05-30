@@ -1,0 +1,12 @@
+.footer{
+    height: 200px;
+    width: 100%;
+    background: rgb(27,28,32);
+    background: linear-gradient(180deg, rgba(27,28,32,0.9472163865546218) 0%, rgba(0,0,0,1) 100%);
+    list-style: none;
+}
+
+.footer li{
+    display: flex;
+    align-items: center;
+}

@@ -8,13 +8,13 @@ from users.models import User
 class New(models.Model):
     title = models.CharField(max_length=150)
     subtitle = models.CharField(max_length=200)
-    imageTitle = models.FileField(upload_to="news_images")
+    imageTitle = models.FileField(upload_to="news_python")
     firstParagraph = models.TextField()
     secondParagraph = models.TextField()
     thirdParagraph = models.TextField()
-    firstImage = models.FileField(upload_to="news_images")
-    secondImage = models.FileField(upload_to="news_images")
-    thirdImage = models.FileField(upload_to="news_images")
+    firstImage = models.FileField(upload_to="news_python")
+    secondImage = models.FileField(upload_to="news_python")
+    thirdImage = models.FileField(upload_to="news_python")
     new_date = models.DateField(null=True)
     
     def __str__(self):

@@ -80,7 +80,55 @@ class Create_New(CreateView): #funciona
         return HttpResponse(200)
     
 
-class Get_All_News_Categories(ListView):
+class Update_New(UpdateView): #probar
+    model = New
+    model = Category_New
+    def post(self, request, *args, **kwargs):
+        #data = json.loads(request.body)
+        post_id = request.POST.get('newId')
+        data_users = request.POST.get('users_data')
+        data_category = request.POST.get('category_data')
+        post_title = request.POST.get('title')
+        post_subtitle = request.POST.get('subtitle')
+        post_imageTitle = request.FILES.get('imageTitle')
+        post_firstParagraph = request.POST.get('firstParagraph')
+        post_secondParagraph = request.POST.get('secondParagraph')
+        post_thirdParagraph = request.POST.get('thirdParagraph')
+        post_firstImage = request.FILES.get('firstImage')
+        post_secondImage = request.FILES.get('secondImage')
+        post_thirdImage = request.FILES.get('thirdImage')
+        post_new_date = request.POST.get('new_date')
+
+        new_instance = New.objects.get(id=post_id)
+        new_instance.title = post_title
+        new_instance.subtitle = post_subtitle 
+        new_instance.imageTitle = post_imageTitle
+        new_instance.firstParagraph = post_firstParagraph
+        new_instance.secondParagraph = post_secondParagraph
+        new_instance.thirdParagraph = post_thirdParagraph
+        new_instance.firstImage = post_firstImage
+        new_instance.secondImage = post_secondImage
+        new_instance.thirdImage = post_thirdImage
+        new_instance.new_date = post_new_date
+
+        new_instance.save(update_fields=['title', 'subtitle', 'imageTitle', 'firstParagraph', 'secondParagraph', 'thirdParagraph', 'firstImage', 'secondImage', 'thirdImage', 'new_date'])
+
+        for item in data_category:
+            category_new_instance = Category_New.objects.get(new_code=post_id)
+            category_instance = Category.objects.get(category=item['category'])
+            category_new_instance.category_code = category_instance
+            category_new_instance.save(update_fields=['category_code'])
+
+        for item in data_users:
+            user_instance = User.objects.get(mail=item['mail'])
+            user_new_instance = User_New.objects.get(new_code=post_id)
+            user_new_instance.user_code = user_instance
+            user_new_instance.save(update_fields=['user_code'])
+
+        return HttpResponse(200)
+
+
+class Get_All_News_Categories(ListView): #funciona
     model = Category_New
 
     def get(self, request, *args, **kwargs):
@@ -107,6 +155,7 @@ class Get_New_Id(ListView):
     def get(self, request, *args, **kwargs):
         new_id = kwargs.get('newId')
         get_new = Category_New.objects.get(new_code=new_id)
+        print(get_new)
         serializer = Category_New_Serializer(get_new)
 
         return JsonResponse(serializer.data, safe=False)

@@ -1,0 +1,39 @@
+
+
+.today-news{
+    height: 600px;
+    width: 100vw;
+    background-color: red;
+    margin-top: 10.5vh;
+}
+
+.title-img{
+    height: 600px;
+    width: 100%;
+    object-fit:cover;
+    filter: brightness(60%);
+}
+
+.news-section{
+    padding: 2rem 8rem;
+    text-align: center;
+}
+
+.categories-news-container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
+   
+}
+
+.categories-news-container > div:hover{
+    cursor: pointer;
+    transform: translateY(-5px);
+    filter: brightness(60%);
+    transition: all .5s;
+}
+
+.categories-news-container img{
+    width: 400px;
+}
+
