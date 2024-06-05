@@ -1,0 +1,42 @@
+.upload-new-container{
+    margin-top: 15vh;
+    display: flex;
+    justify-content: center;
+}
+
+.upload-new-form{
+    text-align: center;
+    width: 58.4vw;
+}
+
+.upload-new-form input{
+    background-color: black;
+    opacity: 0.9;
+    color:rgb(235, 235, 235);
+}
+
+.upload-new-form textarea{
+    background-color: black;
+    opacity: 0.9;
+    color:rgb(235, 235, 235);
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+    font-size: 25px;
+}
+
+.title-subtitle{
+    height: 5vh;
+    width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.upload-new-form button{
+    margin-bottom: 3rem;
+    background-color: rgb(255, 138, 59);
+}
+
+.upload-new-form button:hover{
+    transform: translateY(-5px);
+    transition: all .5s;
+}

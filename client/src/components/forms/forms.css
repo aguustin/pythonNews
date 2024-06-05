@@ -3,6 +3,7 @@
     align-items: center;
     justify-content: center;
     height: 78.9vh;
+    background-color: rgb(17, 17, 17);
 }
 
 .form-container{

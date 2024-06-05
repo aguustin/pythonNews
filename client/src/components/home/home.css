@@ -17,6 +17,11 @@
 .news-section{
     padding: 2rem 8rem;
     text-align: center;
+    background-color: rgb(17, 17, 17);
+}
+
+.news-section h1{
+    color: rgb(235, 235, 235);
 }
 
 .categories-news-container{

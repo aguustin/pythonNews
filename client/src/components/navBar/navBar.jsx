@@ -44,8 +44,8 @@ const NavBar = () => {
                     session.userType == 1 
                     ? 
                     <>
-                        <li className='getin'><a href="/forms/uploadNew">Upload New</a></li>
-                        <li className='signin'><a href="/forms/usersManage">Users Manage</a></li>
+                        <li className='getin'><a href="/uploadNew">Upload New</a></li>
+                        <li className='signin'><a href="/usersManage">Users Manage</a></li>
                     </>
                     : 
                     <>
