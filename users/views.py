@@ -1,36 +1,64 @@
+
 import json
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from users.models import User
 from django.views.generic import CreateView, ListView, UpdateView, DeleteView
+from cryptography.fernet import Fernet
 # Create your views here.
 
 class Create_User(CreateView): #funciona
     model = User
 
     def post(self, request, *args, **kwargs):
-        post_profile = request.FILES.get('profile')
-        post_firstName = request.POST.get('firstName')
-        post_lastName = request.POST.get('lastName')
-        post_mail = request.POST.get('mail')
-        post_password = request.POST.get('password')
-        post_userType = request.POST.get('userType')
+        data = json.loads(request.body)
+        print(data)
+        post_firstname = data.get('username')
+        post_lastname = data.get('lastname')
+        post_mail = data.get('mail')
+        post_password = data.get('password')
+        post_confirm_pass = data.get('confirmPassword')
+        user_exists = User.objects.filter(mail=post_mail)
+        if user_exists:
+            return HttpResponse(412)        #post_userType = request.POST.get('userType')
+        if post_password == post_confirm_pass:
+            save_user = User.objects.create(firstName=post_firstname, lastName=post_lastname, mail=post_mail, password=post_password, userType=2)
+            save_user.save()
 
-        save_user = User.objects.create(profile=post_profile, firstName=post_firstName, lastName=post_lastName, mail=post_mail, password=post_password, userType=post_userType)
-        save_user.save()
-
-        return HttpResponse(200)
+            return HttpResponse(200)
+        else:
+            return HttpResponse(412)
     
-
     
-class Get_User_By_Id(ListView): #funciona
+class Get_In_User(ListView):
     model = User
 
-    def get(self, request, *args, **kwargs):
-        user_id = kwargs.get('userId')
-        get_user_info = list(User.objects.filter(id=user_id).values())
-        print(get_user_info)
-        return JsonResponse(get_user_info, safe=False)
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body)
+        user_mail = data.get('mail');
+        user_pass = data.get('password')
+        get_user_instance = User.objects.filter(mail=user_mail).values()
+        print(list(get_user_instance))
+        if get_user_instance:
+            #desencrypt_pass = Fernet.decrypt(get_user_instance.password)
+            if user_pass:
+                return JsonResponse(list(get_user_instance), safe=False)
+            else:
+                print('Los password no son iguales')
+                return HttpResponse(200)
+        else:
+            print('el usuario no fue encontrado')
+            return HttpResponse(200)   
+
+    
+#class Get_User_By_Id(ListView): #funciona
+   # model = User
+
+    #def get(self, request, *args, **kwargs):
+    #    user_id = kwargs.get('userId')
+    #    get_user_info = list(User.objects.filter(id=user_id).values())
+    #    print(get_user_info)
+    #    return JsonResponse(get_user_info, safe=False)
     
 
     

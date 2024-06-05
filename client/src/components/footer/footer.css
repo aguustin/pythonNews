@@ -1,12 +1,28 @@
 .footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 200px;
-    width: 100%;
+    width: 100vw;
     background: rgb(27,28,32);
     background: linear-gradient(180deg, rgba(27,28,32,0.9472163865546218) 0%, rgba(0,0,0,1) 100%);
     list-style: none;
 }
 
-.footer li{
+.footer-child-container{
     display: flex;
-    align-items: center;
+}
+
+.footer-child{
+    width: 250px;
+}
+
+.footer-child{
+    text-align: center;
+    margin: auto;
+}
+
+.footer-child li{
+    text-align: left;
+    margin: 1rem;
 }

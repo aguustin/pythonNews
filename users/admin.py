@@ -6,6 +6,7 @@ from users.models import User
 
 class UsersAdmin(admin.ModelAdmin):
         list_display = [
+            'id',
             'profile',
             'firstName',
             'lastName',

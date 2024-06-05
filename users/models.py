@@ -1,6 +1,5 @@
 from django.db import models
 from django.forms import model_to_dict
-
 # Create your models here.
 
 class User(models.Model):
@@ -9,10 +8,10 @@ class User(models.Model):
     lastName = models.CharField(max_length=20)
     mail = models.EmailField(max_length=50)
     password = models.CharField(max_length=30)
-    userType = models.IntegerField()
+    userType = models.IntegerField(default=0, null=True, blank=True)
 
     def __str__(self):
-        return self.mail
+        return str(self.id)
     
     def toJSON(self):
         item = model_to_dict(self)

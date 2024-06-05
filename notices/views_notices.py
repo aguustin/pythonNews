@@ -27,7 +27,7 @@ class Create_category(CreateView): #funciona
             return HttpResponse(200)
         
 
-class Create_New(CreateView): #funciona
+class Upload_New(CreateView): #funciona
     model = User
     model = New
     model = Category
