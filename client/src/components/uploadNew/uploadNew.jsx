@@ -1,13 +1,30 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import './uploadNew.css'
+import NewContext from '../../context/productContext';
+import UserContext from '../../context/usersContext';
 
 const UploadNewComp = () => {
 
-    const [categories, setCategories] = useState();
-    const [users, setUsers] = useState();
+    const {session} = useContext(UserContext)
+    const {uploadNewContext} = useContext(NewContext)
+    const [categories, setCategories] = useState([])
+    const [users, setUsers] = useState([])
 
-    const uploadNew = (e) => {
-        const formData = new FormData()
+    const handleCategories = (e) => {
+        const selectedOptions = Array.from(e.target.selectedOptions, (x) => x.value)
+        setCategories([...categories, selectedOptions[0]])
+    }
+
+    const handleUsers = (e) => {
+        const selectedOptions = Array.from(e.target.selectedOptions, (x) => x.value)
+        setUsers([...users, selectedOptions[0]])
+    }
+
+
+    const uploadNew = async (e) => {
+        const formData = new FormData();
+        e.preventDefault()
+        formData.append("userId", session.id)
         formData.append("title", e.target.elements.title.value)
         formData.append("subtitle", e.target.elements.subtitle.value)
         formData.append("imageTitle", e.target.elements.imageTitle.files[0])
@@ -17,28 +34,28 @@ const UploadNewComp = () => {
         formData.append("secondImage", e.target.elements.secondImage.files[0])
         formData.append("thirdParagraph", e.target.elements.thirdParagraph.value)
         formData.append("thirdImage", e.target.elements.secondImage.files[0])
-
-        uploadNewContext(formData)
+        
+        await uploadNewContext(formData)
     }
 
 
     return(
         <>
             <div className='upload-new-container'>
-                <form className='upload-new-form' onSubmit={() => uploadNew()}>
-                    <select name="category">
-                        <option value="categoria A" onChange={setCategories([...categories, e.target.value])}>categoria A</option>
-                        <option value="categoria B" onChange={setCategories([...categories, e.target.value])}>categoria B</option>
-                        <option value="categoria C" onChange={setCategories([...categories, e.target.value])}>categoria C</option>
-                        <option value="categoria D" onChange={setCategories([...categories, e.target.value])}>categoria D</option>
-                        <option value="categoria E" onChange={setCategories([...categories, e.target.value])}>categoria E</option>
+                <form className='upload-new-form' onSubmit={(e) => uploadNew(e)}>
+                    <select name="category" multiple onChange={handleCategories}>
+                        <option value="categoria A">categoria A</option>
+                        <option value="categoria B">categoria B</option>
+                        <option value="categoria C">categoria C</option>
+                        <option value="categoria D">categoria D</option>
+                        <option value="categoria E">categoria E</option>
                     </select>
-                    <select name="writers">
-                        <option value="usuario A" onChange={setUsers([...users, e.target.value])}>usuario A</option>
-                        <option value="usuario B" onChange={setUsers([...users, e.target.value])}>usuario B</option>
-                        <option value="usuario C" onChange={setUsers([...users, e.target.value])}>usuario C</option>
-                        <option value="usuario D" onChange={setUsers([...users, e.target.value])}>usuario D</option>
-                        <option value="usuario E" onChange={setUsers([...users, e.target.value])}>usuario E</option>
+                    <select name="writers" multiple onChange={handleUsers}>
+                        <option value="usuario A">usuario A</option>
+                        <option value="usuario B">usuario B</option>
+                        <option value="usuario C">usuario C</option>
+                        <option value="usuario D">usuario D</option>
+                        <option value="usuario E">usuario E</option>
                     </select>
                     <div>
                         <div>

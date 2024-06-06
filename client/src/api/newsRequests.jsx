@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const uploadNewRequest = (data) => axios.post('http://127.0.0.1:8000/uploadNew', data)
+export const uploadNewRequest = (formData) => axios.post('http://127.0.0.1:8000/uploadNew/',formData)
 
 
 /*    path('createCategory/', csrf_exempt(views_notices.Create_category.as_view()), name="create_category"),

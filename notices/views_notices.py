@@ -35,9 +35,10 @@ class Upload_New(CreateView): #funciona
     model = Category_New
 
     def post(self, request, *args, **kwargs):
-        data = json.loads(request.body)
-        data_users = data.get('users_data')
-        data_category = data.get('category_data')
+        #data = json.loads(request.body)
+        #print(data)
+        #data_users = request.POST.get('users')
+        #data_category = request.POST.get('categories')
         post_title = request.POST.get('title')
         post_subtitle = request.POST.get('subtitle')
         post_imageTitle = request.FILES.get('imageTitle')
@@ -48,7 +49,7 @@ class Upload_New(CreateView): #funciona
         post_secondImage = request.FILES.get('secondImage')
         post_thirdImage = request.FILES.get('thirdImage')
         new_date = date.today()
-        print("data_users", data_users)
+        
         new_instance = New.objects.create(title=post_title, 
                                           subtitle=post_subtitle, 
                                           imageTitle=post_imageTitle, 
@@ -61,21 +62,21 @@ class Upload_New(CreateView): #funciona
                                           new_date=new_date)
         new_instance.save()
 
-        for item in data_users:
-            user_instance = User.objects.get(mail=item['mail'])
-            users_new_instance = User_New.objects.create(
-                  user_code=user_instance,
-                  new_code=new_instance
-            )
-            users_new_instance.save()
+        #for item in data_users:
+        #    user_instance = User.objects.get(mail=item['mail'])
+        #    users_new_instance = User_New.objects.create(
+        #          user_code=user_instance,
+        #          new_code=new_instance
+        #    )
+        #    users_new_instance.save()
 
-        for item in data_category:
-            category_instance = Category.objects.get(category=item['category'])
-            category_new_instance = Category_New.objects.create(
-                category_code=category_instance,
-                new_code=new_instance
-            )
-            category_new_instance.save()
+       # for item in data_category:
+        #    category_instance = Category.objects.get(category=item['category'])
+       #     category_new_instance = Category_New.objects.create(
+       #         category_code=category_instance,
+       #         new_code=new_instance
+        #    )
+       #     category_new_instance.save()
 
         return HttpResponse(200)
     

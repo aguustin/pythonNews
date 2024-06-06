@@ -22,6 +22,10 @@ class New(models.Model):
     
     def toJSON(self):
         item = model_to_dict(self)
+        item['imageTitle'] = self.get_image()
+        item['firstImage'] = self.get_image()
+        item['secondImage'] = self.get_image()
+        item['thirdImage'] = self.get_image()
         return item
 
     class Meta:
