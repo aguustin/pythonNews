@@ -20,11 +20,12 @@ const UploadNewComp = () => {
         setUsers([...users, selectedOptions[0]])
     }
 
-
+    console.log(users, " ", categories)
     const uploadNew = async (e) => {
         const formData = new FormData();
         e.preventDefault()
-        formData.append("userId", session.id)
+        formData.append("users", JSON.stringify(users))
+        formData.append("categories", JSON.stringify(categories))
         formData.append("title", e.target.elements.title.value)
         formData.append("subtitle", e.target.elements.subtitle.value)
         formData.append("imageTitle", e.target.elements.imageTitle.files[0])
@@ -44,18 +45,12 @@ const UploadNewComp = () => {
             <div className='upload-new-container'>
                 <form className='upload-new-form' onSubmit={(e) => uploadNew(e)}>
                     <select name="category" multiple onChange={handleCategories}>
-                        <option value="categoria A">categoria A</option>
-                        <option value="categoria B">categoria B</option>
-                        <option value="categoria C">categoria C</option>
-                        <option value="categoria D">categoria D</option>
-                        <option value="categoria E">categoria E</option>
+                        <option value="Deportes">Deportes</option>
+                        <option value="Politica">Politica</option>
                     </select>
                     <select name="writers" multiple onChange={handleUsers}>
-                        <option value="usuario A">usuario A</option>
-                        <option value="usuario B">usuario B</option>
-                        <option value="usuario C">usuario C</option>
-                        <option value="usuario D">usuario D</option>
-                        <option value="usuario E">usuario E</option>
+                        <option value="agustin@gmail.com">Agustin</option>
+                        <option value="juan@gmail.com">Juan</option>
                     </select>
                     <div>
                         <div>

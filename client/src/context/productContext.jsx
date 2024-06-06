@@ -7,8 +7,8 @@ export const NewContextProvider = ({children}) => {
 
     const [news, setNews] = useState();
 
-    const uploadNewContext = async (userId, formData, categories) => {
-        const res = uploadNewRequest(userId, formData, categories)
+    const uploadNewContext = async (formData) => {
+        const res = await uploadNewRequest(formData)
         //setNews([...news, res.data])
     }
 
